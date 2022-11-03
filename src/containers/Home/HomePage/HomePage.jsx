@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header } from '../../Common/Header/Header';
+import { Header } from '../../../Common/Header/Header';
+import { Login } from '../../../Common/Login/Login';
 
 class HomePage extends React.Component {
     // constructor(props) {
@@ -10,6 +11,7 @@ class HomePage extends React.Component {
         return (
             <div className="bg-[#efffcf] h-screen">
                 <Header />
+                <Login />
             </div>
         );
     }

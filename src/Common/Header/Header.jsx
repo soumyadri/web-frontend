@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { getuserDetails } from '../../containers/HomePage/api';
+import { getuserDetails } from './api';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -49,7 +49,7 @@ export const Header = () => {
     }, []);
 
     return (
-        <div className='bg-[#1d1d1d] opacity-0.5 flex py-1p px-2p justify-between cursor-pointer'>
+        <div className='bg-[#1d1d1de1] opacity-0.5 flex py-1p px-2p justify-between cursor-pointer'>
            <div className='text-[20px] font-bold text-black-400 flex'>
                 <img className='w-4p h-4p m-1p' src="https://soumyadri.github.io/webexamcollege/Main_Icon.png" alt="logo" />
                 <h3 className='my-auto mx-1p text-[white]'>Academia</h3>
@@ -68,4 +68,4 @@ export const Header = () => {
             </div>
         </div>
     )
-}
+};
