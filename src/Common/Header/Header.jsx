@@ -38,9 +38,19 @@ export const Header = () => {
     const [userData, setUserData] = useState({});
     
     const getUserInfo = async () => {
-        let data = await getuserDetails();
-        if(data?.data?.data) {
-            setUserData(data?.data?.data[0]);
+        if(localStorage.getItem('webExamEmail')) {
+          let payload = {
+            email : localStorage.getItem('webExamEmail'),
+            first_name: localStorage.getItem('webExamName')?.split(' ')[0],
+            last_name: localStorage.getItem('webExamName')?.split(' ')[1],
+            profilePic: localStorage.getItem('webExamProfilePic') || "",
+          }
+          setUserData(payload);
+        } else {
+          let data = await getuserDetails();
+          if(data?.data?.data) {
+              setUserData(data?.data?.data[0]);
+          }
         }
     }
 

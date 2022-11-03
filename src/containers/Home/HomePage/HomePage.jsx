@@ -11,7 +11,6 @@ class HomePage extends React.Component {
         return (
             <div className="bg-[#efffcf] h-screen">
                 <Header />
-                <Login />
             </div>
         );
     }
