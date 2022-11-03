@@ -1,0 +1,30 @@
+.success-container {
+    position: fixed;
+    right: 3%;
+    top: 10%;
+    background: rgb(30, 169, 6);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px #4a41414d;
+}
+.warning-container {
+    position: fixed;
+    right: 3%;
+    top: 10%;
+    background: rgb(208, 234, 12);
+    color: rgb(14, 9, 9);
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px #4a41414d;
+}
+.error-container {
+    position: fixed;
+    right: 3%;
+    top: 10%;
+    background: red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px #4a41414d;
+}
