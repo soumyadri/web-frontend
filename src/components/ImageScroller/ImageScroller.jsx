@@ -17,6 +17,8 @@ const styles = {
     left: "100px",
     textAlign: "left",
     lineHeight: "2",
+    background: "#ffffff52",
+    padding: "0 30px",
   },
   description: {
     fontSize: "32px",
