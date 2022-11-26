@@ -78,6 +78,9 @@ export const Registration = () => {
     const result = await postApi("user/signup", payload);
 
     if (result?.status === 200) {
+      localStorage.setItem("webExamEmail", payload.email);
+      localStorage.setItem("webExamProfilePic", "");
+      localStorage.setItem("webExamName", payload?.first_name + " " + payload?.last_name);
       setAlertState({...alertState, message: "User registered successfully", state: "success", status: true });
       setTimeout(function() {
         setAlertState({...alertState, status: false});

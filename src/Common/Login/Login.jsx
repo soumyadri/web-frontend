@@ -43,7 +43,11 @@ export const Login = () => {
     const result = await postApi("user/login", values);
 
     if (result?.status === 200) {
+      localStorage.setItem("webExamEmail", result?.data?.email);
+      localStorage.setItem("webExamProfilePic", result?.data?.profilePic);
+      localStorage.setItem("webExamName", result?.data?.first_name + " " + result?.data?.last_name);
       alert("User successfully login");
+      window.location.href = "/";
     } else {
       alert("Something went wrong");
     }

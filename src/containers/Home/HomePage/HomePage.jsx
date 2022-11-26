@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header } from '../../../Common/Header/Header';
-import { Login } from '../../../Common/Login/Login';
+import ImageCarouselContainer from '../../../components/ImageScroller/ImageScroller';
+import RouterContainer from '../../../components/RoutingContainer/RouterContainer';
 
 class HomePage extends React.Component {
     // constructor(props) {
@@ -11,7 +12,8 @@ class HomePage extends React.Component {
         return (
             <div className="bg-[#efffcf] h-screen">
                 <Header />
-                <Login />
+                <ImageCarouselContainer />
+                <RouterContainer />
             </div>
         );
     }

@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { getuserDetails } from './api';
+import { getuserDetails } from '../api';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -38,10 +38,24 @@ export const Header = () => {
     const [userData, setUserData] = useState({});
     
     const getUserInfo = async () => {
-        let data = await getuserDetails();
-        if(data?.data?.data) {
-            setUserData(data?.data?.data[0]);
+        if(localStorage.getItem('webExamEmail')) {
+          let payload = {
+            email : localStorage.getItem('webExamEmail'),
+            first_name: localStorage.getItem('webExamName')?.split(' ')[0],
+            last_name: localStorage.getItem('webExamName')?.split(' ')[1],
+            profilePic: localStorage.getItem('webExamProfilePic') || "",
+          }
+          setUserData(payload);
+        } else {
+          let data = await getuserDetails();
+          if(data?.data?.data) {
+              setUserData(data?.data?.data[0]);
+          }
         }
+    }
+
+    const handleRoutingToHome = () => {
+      window.location.href = '/';
     }
 
     useEffect(() => {
@@ -50,7 +64,7 @@ export const Header = () => {
 
     return (
         <div className='bg-[#1d1d1de1] opacity-0.5 flex py-1p px-2p justify-between cursor-pointer'>
-           <div className='text-[20px] font-bold text-black-400 flex'>
+           <div onClick={handleRoutingToHome} className='text-[20px] font-bold text-black-400 flex'>
                 <img className='w-4p h-4p m-1p' src="https://soumyadri.github.io/webexamcollege/Main_Icon.png" alt="logo" />
                 <h3 className='my-auto mx-1p text-[white]'>Academia</h3>
             </div>
