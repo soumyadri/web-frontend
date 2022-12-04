@@ -5,8 +5,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { postApi } from "../../api";
 
-export const ExamPage = () => {
+export const ExamPage = ({result, setResult, setExamResultStatus, answerSheet, setAnswerSheet}) => {
   const [questionSet, setQuestionSet] = useState([]);
   const [subject, setSubject] = useState("");
   const [clockTimer, setClockTimer] = useState(600);
@@ -22,6 +23,16 @@ export const ExamPage = () => {
     let minute = Math.floor(sec / 60);
     let second = sec % 60;
     return `${minute}:${second}`;
+  }
+
+  const handleRadioGroupOption = (payload, select) => {
+    setAnswerSheet({...answerSheet, [payload._id]: select});
+  };
+
+  const handleSubmit = async () => {
+    const result = await postApi("question/checkResult", answerSheet);
+    setResult(result);
+    setExamResultStatus(true);
   }
 
   useEffect(() => {
@@ -49,7 +60,7 @@ export const ExamPage = () => {
         </span>
         <div className="flex w-1/2 text-right justify-between pt-4p">
             <span>Remaining Time: <span className="font-semibold">{calculateTime(clockTimer)} sec</span></span>
-            <button className="bg-green-300 h-4p w-[200px] border-2 border-solid border-cyan-200 text-md font-semibold">Submit</button>
+            <button onClick={handleSubmit} className="bg-green-300 h-4p w-[200px] border-2 border-solid border-cyan-200 text-md font-semibold">Submit</button>
         </div>
       </div>
       <div className="flex flex-col rounded-xl w-[80%] mx-auto my-4p bg-blue-50 border-solid border-4 border-cyan-400 p-4p">
@@ -64,21 +75,25 @@ export const ExamPage = () => {
             name="radio-buttons-group"
           >
             <FormControlLabel
+              onClick={()=>handleRadioGroupOption(el, el.optionA)}
               value={el.optionA}
               control={<Radio />}
               label={el.optionA}
             />
             <FormControlLabel
+              onClick={()=>handleRadioGroupOption(el, el.optionB)}
               value={el.optionB}
               control={<Radio />}
               label={el.optionB}
             />
             <FormControlLabel
+              onClick={()=>handleRadioGroupOption(el, el.optionC)}
               value={el.optionC}
               control={<Radio />}
               label={el.optionC}
             />
             <FormControlLabel
+              onClick={()=>handleRadioGroupOption(el, el.optionD)}
               value={el.optionD}
               control={<Radio />}
               label={el.optionD}

@@ -5,6 +5,7 @@ import { Register } from './containers/Registration/Register';
 import { LoginContainer } from './containers/Login/LoginContainer';
 import { StudentDashboard } from './containers/StudentDashboard/StudentDashboard';
 import { ExamDashboard } from './containers/ExamDashboard/ExamDashboard';
+import { TeacherDashboard } from './containers/TeacherDashboard/TeacherDashboard';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/signup' element={<Register />} />
           <Route path='/student' element={<StudentDashboard />} />
           <Route path='/exampage' element={<ExamDashboard />} />
+          <Route path='/teacherPortal' element={<TeacherDashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
