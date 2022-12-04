@@ -14,12 +14,16 @@ export default function RouterContainer() {
         window.location.href = "/student";
     };
 
+    const handleTeacherRouting = () => {
+        window.location.href = "/teacherPortal";
+    }
+
     return (
         <div style={styles.outerContainer} className="w-full h-[228px]">
             <span className="bg-[#ffffff61] px-2p font-bold text-[30px] text-red-600 flex mx-auto w-fit py-2p">Choose Desired Role</span>
             <div className="flex w-full justify-evenly">
                 <button className="px-5p py-1p my-4p bg-orange-400 font-semibold text-[crimson] text-[18px] rounded-md" onClick={handleStudentRouting}>For Student</button>
-                <button className="px-5p py-1p my-4p bg-orange-400 font-semibold text-[crimson] text-[18px] rounded-md">For Teacher</button>
+                <button className="px-5p py-1p my-4p bg-orange-400 font-semibold text-[crimson] text-[18px] rounded-md" onClick={handleTeacherRouting}>For Teacher</button>
             </div>
         </div>
     )
