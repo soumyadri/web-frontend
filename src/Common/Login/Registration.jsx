@@ -80,6 +80,7 @@ export const Registration = () => {
     if (result?.status === 200) {
       localStorage.setItem("webExamEmail", payload.email);
       localStorage.setItem("webExamProfilePic", "");
+      localStorage.setItem("webExamRole", "student");
       localStorage.setItem("webExamName", payload?.first_name + " " + payload?.last_name);
       setAlertState({...alertState, message: "User registered successfully", state: "success", status: true });
       setTimeout(function() {

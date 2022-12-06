@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
@@ -12,12 +12,19 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { postApi } from "../../api";
+import { AlertPopUp } from "../AlertPopUp/AlertPopUp";
+import { timeout } from "../../utils/constant";
 
 export const Login = () => {
   const [values, setValues] = React.useState({
     email: "",
     password: "",
     showPassword: true,
+  });
+  const [alertState, setAlertState] = useState({
+    message: '',
+    state: 'error',
+    status: false,
   });
 
   const handleChange = (prop, event) => {
@@ -37,24 +44,36 @@ export const Login = () => {
 
   const handleSubmit = async () => {
     if (!(values.email && values.password)) {
-      alert("please fill all the details");
+      setAlertState({...alertState, message: "Please fill all the details", state: "error", status: true });
+      setTimeout(function() {
+        setAlertState({...alertState, status: false});
+      }, timeout);
       return;
     }
     const result = await postApi("user/login", values);
 
     if (result?.status === 200) {
+      console.log('Result', result.data);
       localStorage.setItem("webExamEmail", result?.data?.email);
       localStorage.setItem("webExamProfilePic", result?.data?.profilePic);
+      localStorage.setItem("webExamRole", result?.data?.role);
       localStorage.setItem("webExamName", result?.data?.first_name + " " + result?.data?.last_name);
-      alert("User successfully login");
+      setAlertState({...alertState, message: "User successfully login", state: "success", status: true });
+      setTimeout(function() {
+        setAlertState({...alertState, status: false});
+      }, timeout);
       window.location.href = "/";
     } else {
-      alert("Something went wrong");
+      setAlertState({...alertState, message: "User successfully login", state: "error", status: true });
+      setTimeout(function() {
+        setAlertState({...alertState, status: false});
+      }, timeout);
     }
   };
 
   return (
     <div className="bg-[#f4e6e6] rounded-2xl w-[50%] p-[20px] m-auto mt-5p border-[#cbb2b2] border-[1px] fixed top-5p left-1/4 z-10">
+      {alertState.status && <AlertPopUp message={alertState.message} state={alertState.state} />}
       <h3 className="w-[100px] m-auto text-[24px] font-semibold my-2p">
         Login
       </h3>

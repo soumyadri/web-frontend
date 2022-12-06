@@ -7,6 +7,8 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { postApi } from "../../api";
+import { AlertPopUp } from "../../Common/AlertPopUp/AlertPopUp";
+import { timeout } from "../../utils/constant";
 
 const payload = {
   question: "",
@@ -22,6 +24,11 @@ const payload = {
 export const AddQuestionPortal = () => {
   const [subject, setSubject] = useState("html");
   const [values, setValues] = useState(payload);
+  const [alertState, setAlertState] = useState({
+    message: '',
+    state: 'error',
+    status: false,
+  });
 
   const handleChange = (event) => {
     setSubject(event.target.value);
@@ -36,17 +43,27 @@ export const AddQuestionPortal = () => {
         setValues({...values, "subject": subject});
         const result = await postApi('question/add', values);
         if(result?.status == 200) {
-          alert('Success');
+          setAlertState({...alertState, message: "Success", state: "success", status: true });
+            setTimeout(function() {
+                setAlertState({...alertState, status: false});
+            }, timeout);
         } else {
-          alert('Something went wrong');
+          setAlertState({...alertState, message: "Something went wrong", state: "error", status: true });
+            setTimeout(function() {
+                setAlertState({...alertState, status: false});
+            }, timeout);
         }
     } else {
-      alert('Something went wrong');
+      setAlertState({...alertState, message: "Something went wrong", state: "error", status: true });
+      setTimeout(function() {
+          setAlertState({...alertState, status: false});
+      }, timeout);
     }
   }
 
   return (
     <div className="w-4/5 h-[88vh] bg-green-400 p-4p" style={{background: "url(https://img.freepik.com/free-vector/hand-drawn-back-school-background_23-2149056177.jpg?w=996&t=st=1670086998~exp=1670087598~hmac=c4411d56f48724a90164e40d3b5b0ed67270aa6666b9e31dcdfdc1d5f8c9833f)"}}>
+      {alertState.status && <AlertPopUp message={alertState.message} state={alertState.state} />}
       <span className="text-lg font-semibold rounded-lg py-2p px-4p bg-green-100 border-2 border-solid border-blue-400 shadow-lg shadow-blue-200">Add Question</span>
       <div className="bg-slate-200 rounded-lg p-2p grid grid-cols-2 gap-3p py-4p border-2 border-solid border-blue-400">
         <Box

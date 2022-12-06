@@ -2,9 +2,16 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { getAllQuestions } from "../../Common/api";
 import { postApi } from "../../api";
+import { timeout } from "../../utils/constant";
+import { AlertPopUp } from "../../Common/AlertPopUp/AlertPopUp";
 
 export const DeleteQuestionPortal = () => {
   const [allQuestions, setQuestions] = useState([]);
+  const [alertState, setAlertState] = useState({
+    message: '',
+    state: 'error',
+    status: false,
+  });
 
   const getQuestionDetails = async () => {
     const result = await getAllQuestions();
@@ -20,10 +27,16 @@ export const DeleteQuestionPortal = () => {
   const handleQuestionDelete = async (params) => {
     const result = await postApi(`question/delete/${params._id}`);
     if(result?.status == 200) {
-        alert("Deleted successfully");
+        setAlertState({...alertState, message: "Deleted successfully", state: "success", status: true });
+        setTimeout(function() {
+            setAlertState({...alertState, status: false});
+        }, timeout);
         getQuestionDetails();
     } else {
-        alert("Something went wrong");
+      setAlertState({...alertState, message: "Something went wrong", state: "error", status: true });
+      setTimeout(function() {
+          setAlertState({...alertState, status: false});
+      }, timeout);
     }
   };
 
@@ -35,6 +48,7 @@ export const DeleteQuestionPortal = () => {
           "url(https://img.freepik.com/free-vector/hand-drawn-back-school-background_23-2149056177.jpg?w=996&t=st=1670086998~exp=1670087598~hmac=c4411d56f48724a90164e40d3b5b0ed67270aa6666b9e31dcdfdc1d5f8c9833f)",
       }}
     >
+      {alertState.status && <AlertPopUp message={alertState.message} state={alertState.state} />}
       <span className="text-lg font-semibold rounded-lg py-2p px-4p bg-green-100 border-2 border-solid border-blue-400 shadow-lg shadow-blue-200">
         Delete Question
       </span>

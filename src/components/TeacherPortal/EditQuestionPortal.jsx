@@ -7,6 +7,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import { postApi } from "../../api";
+import { timeout } from "../../utils/constant";
+import { AlertPopUp } from "../../Common/AlertPopUp/AlertPopUp";
 
 const payload = {
   question: "",
@@ -24,6 +26,11 @@ export const EditQuestionPortal = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [subject, setSubject] = useState("html");
   const [values, setValues] = useState(payload);
+  const [alertState, setAlertState] = useState({
+    message: '',
+    state: 'error',
+    status: false,
+  });
 
   const handleChange = (event) => {
     setSubject(event.target.value);
@@ -48,14 +55,23 @@ export const EditQuestionPortal = () => {
       setValues({ ...values, subject: subject, _id: null });
       const result = await postApi(`question/edit/${values._id}`, values);
       if (result?.status == 200) {
-        alert("Edited successfully");
+        setAlertState({...alertState, message: "Edited successfully", state: "success", status: true });
+        setTimeout(function() {
+            setAlertState({...alertState, status: false});
+        }, timeout);
         setEditModalOpen(false);
         getQuestionDetails();
       } else {
-        alert("Something went wrong");
+        setAlertState({...alertState, message: "Something went wrong", state: "error", status: true });
+        setTimeout(function() {
+            setAlertState({...alertState, status: false});
+        }, timeout);
       }
     } else {
-      alert("Something went wrong");
+      setAlertState({...alertState, message: "Something went wrong", state: "error", status: true });
+      setTimeout(function() {
+          setAlertState({...alertState, status: false});
+      }, timeout);
     }
   };
 
@@ -84,6 +100,7 @@ export const EditQuestionPortal = () => {
           "url(https://img.freepik.com/free-vector/hand-drawn-back-school-background_23-2149056177.jpg?w=996&t=st=1670086998~exp=1670087598~hmac=c4411d56f48724a90164e40d3b5b0ed67270aa6666b9e31dcdfdc1d5f8c9833f)",
       }}
     >
+      {alertState.status && <AlertPopUp message={alertState.message} state={alertState.state} />}
       <span className="text-lg font-semibold rounded-lg py-2p px-4p bg-green-100 border-2 border-solid border-blue-400 shadow-lg shadow-blue-200">
         Edit Question
       </span>
