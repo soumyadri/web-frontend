@@ -1,6 +1,6 @@
 import axios from "axios";
-// const baseUrl = "http://localhost:8000/"; // for development
-const baseUrl = "https://webexam-backend.vercel.app/" // for production
+const baseUrl = "http://localhost:8000/"; // for development
+// const baseUrl = "https://webexam-backend.vercel.app/" // for production
 
 export const postApi = (url, params) => {
     const options = {

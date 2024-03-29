@@ -20,7 +20,7 @@ export default function RouterContainer() {
 
     const handleStudentRouting = () => {
         var roles = localStorage.getItem("webExamRole");
-        if(roles == "student") {
+        if(roles === "student") {
             window.location.href = "/student";
         } else {
             setAlertState({...alertState, message: "You don't have permission to access this page", state: "error", status: true });
@@ -32,7 +32,7 @@ export default function RouterContainer() {
 
     const handleTeacherRouting = () => {
         var roles = localStorage.getItem("webExamRole");
-        if(roles == "teacher") {
+        if(roles === "teacher") {
             window.location.href = "/teacherPortal";
         } else {
             setAlertState({...alertState, message: "You don't have permission to access this page", state: "error", status: true });
@@ -43,7 +43,7 @@ export default function RouterContainer() {
     }
 
     return (
-        <div style={styles.outerContainer} className="w-full h-[228px]">
+        <div style={styles.outerContainer} className="w-full h-[250px]">
             {alertState.status && <AlertPopUp message={alertState.message} state={alertState.state} />}
             <span className="bg-[#ffffff61] px-2p font-bold text-[30px] text-red-600 flex mx-auto w-fit py-2p">Choose Desired Role</span>
             <div className="flex w-full justify-evenly">

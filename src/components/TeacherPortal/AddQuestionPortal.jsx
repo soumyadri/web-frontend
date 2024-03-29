@@ -39,6 +39,7 @@ export const AddQuestionPortal = () => {
   };
 
   const handleSubmit = async () => {
+    console.log(values, subject);
     if(subject && values && values.question && values.optionA && values.optionB && values.optionC && values.optionD && values.answer && values.credits) {
         setValues({...values, "subject": subject});
         const result = await postApi('question/add', values);

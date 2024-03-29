@@ -3,7 +3,7 @@ import './AlertPopUp.scss';
 
 export const AlertPopUp = ({message, state}) => {
     return (
-        <div className={`${state}-container`}>
+        <div className={`notification-container ${state}-container`}>
             {message}
         </div>
     )

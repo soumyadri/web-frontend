@@ -43,7 +43,7 @@ export const ExamPage = ({result, setResult, setExamResultStatus, answerSheet, s
   }, []);
 
   useEffect(() => {
-    if(clockTimer != 0) {
+    if(clockTimer !== 0) {
         setTimeout(() => {
             setClockTimer(clockTimer - 1);
         }, 1000);

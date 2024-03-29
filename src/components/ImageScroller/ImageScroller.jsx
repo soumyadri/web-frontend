@@ -1,5 +1,5 @@
-import React, {useState } from "react";
-import { images } from "../../utils/constant";
+import React from "react";
+import { GetCarousolImages } from "../../Hooks/GetCarousolImages";
 
 const styles = {
   textContainer: {
@@ -28,23 +28,7 @@ const styles = {
 }
 
 export default function ImageCarouselContainer() {
-  const [identifier, setIdentifier] = useState(2);
-
-  const handleIdentifier = (params) => {
-    if(params === "left") {
-      if(identifier === 0) {
-        setIdentifier(2);
-      } else {
-        setIdentifier(identifier - 1);
-      }
-    } else {
-      if(identifier === 2) {
-        setIdentifier(0);
-      } else {
-        setIdentifier(identifier + 1);
-      }
-    }
-  };
+  const { image, handleIdentifier } = GetCarousolImages(0);
 
   return (
     <div>
@@ -52,9 +36,9 @@ export default function ImageCarouselContainer() {
         <span>Academia School</span>
         <span style={styles.description}>We are about more than just Education.</span>
       </div>
-      <button onClick={()=>handleIdentifier('left')} className="absolute top-[250px] font-bold text-[24px] left-2p text-slate-100">{'<'}</button>
-      <img className="w-full h-[400px]" src={images[identifier]} loading="lazy" alt="cover" />
-      <button onClick={()=>handleIdentifier('right')} className="absolute top-[250px] font-bold text-[24px] right-2p text-slate-100">{'>'}</button>
+      <button onClick={()=>handleIdentifier('left', false)} className="absolute top-[250px] font-bold text-[24px] left-2p text-slate-100">{'<'}</button>
+      <img className="w-full h-[70dvh]" src={image} loading="lazy" alt="cover" />
+      <button onClick={()=>handleIdentifier('right', false)} className="absolute top-[250px] font-bold text-[24px] right-2p text-slate-100">{'>'}</button>
     </div>
   );
 }

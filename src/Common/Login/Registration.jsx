@@ -25,6 +25,7 @@ export const Registration = () => {
     name: "",
     email: "",
     password: "",
+    role: "",
     showPassword: true,
   });
 

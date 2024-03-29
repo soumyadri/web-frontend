@@ -12,7 +12,7 @@ export const TeacherPortal = () => {
         <div
           onClick={() => setTabClicked("addQuestion")}
           className={`${
-            tabClicked == "addQuestion" ? "bg-green-600" : "bg-blue-600"
+            tabClicked === "addQuestion" ? "bg-green-600" : "bg-blue-600"
           } h-[60px] mb-2p text-white text-[18px] p-1p cursor-pointer`}
         >
           Add Questions
@@ -20,7 +20,7 @@ export const TeacherPortal = () => {
         <div
           onClick={() => setTabClicked("editQuestion")}
           className={`${
-            tabClicked == "editQuestion" ? "bg-green-600" : "bg-blue-600"
+            tabClicked === "editQuestion" ? "bg-green-600" : "bg-blue-600"
           } h-[60px] mb-2p text-white text-[18px] p-1p cursor-pointer`}
         >
           Edit Questions
@@ -28,19 +28,19 @@ export const TeacherPortal = () => {
         <div
           onClick={() => setTabClicked("deleteQuestion")}
           className={`${
-            tabClicked == "deleteQuestion" ? "bg-green-600" : "bg-blue-600"
+            tabClicked === "deleteQuestion" ? "bg-green-600" : "bg-blue-600"
           } h-[60px] mb-2p text-white text-[18px] p-1p cursor-pointer`}
         >
           Delete Questions
         </div>
       </div>
-      {tabClicked == "addQuestion" && (
+      {tabClicked === "addQuestion" && (
         <AddQuestionPortal />
       )}
-      {tabClicked == "editQuestion" && (
+      {tabClicked === "editQuestion" && (
         <EditQuestionPortal />
       )}
-      {tabClicked == "deleteQuestion" && (
+      {tabClicked === "deleteQuestion" && (
         <DeleteQuestionPortal />
       )}
     </div>

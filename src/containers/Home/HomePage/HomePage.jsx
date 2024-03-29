@@ -4,9 +4,6 @@ import ImageCarouselContainer from '../../../components/ImageScroller/ImageScrol
 import RouterContainer from '../../../components/RoutingContainer/RouterContainer';
 
 class HomePage extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
 
     render() {
         return (

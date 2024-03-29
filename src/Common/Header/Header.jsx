@@ -82,7 +82,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <div className="bg-[#1d1d1de1] opacity-0.5 flex py-1p px-2p justify-between cursor-pointer">
+    <div className="bg-[#1d1d1de1] opacity-0.5 flex py-1p px-2p justify-between cursor-pointer sticky w-full top-0p">
       <div
         onClick={handleRoutingToHome}
         className="text-[20px] font-bold text-black-400 flex"
@@ -120,7 +120,7 @@ export const Header = () => {
           />
         </div>
       ) : (
-        <div className="flex w-[28%] justify-between">
+        <div className="flex w-[300px] justify-between">
           <div onClick={handleLogin} className="text-[17px] font-medium h-4p m-auto text-black-500 bg-[#9a9a70] rounded-md px-4p py-[6px] flex text-left">
             Login
           </div>
